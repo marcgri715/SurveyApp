@@ -36,10 +36,19 @@ public class SurveyAdapter extends ArrayAdapter<Answer> {
 		checkbox = (CheckBox) row.findViewById(R.id.checkboxID);
 		checkbox.setChecked(holder.getValue());
 		checkbox.setText(holder.getContext());
-		row.setTag(holder);
+		checkbox.setTag(position);
+		checkbox.setOnClickListener(new CheckBox.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				CheckBox clicked = (CheckBox) v;
+				itemList.get((Integer)v.getTag()).setValue(clicked.isChecked());
+			}
+		});
+		
 		return row;
 	}
-
+	
 	OnCheckedChangeListener checkBoxListener = new OnCheckedChangeListener() {
 		public void onCheckedChanged(CompoundButton buttonView,
 				boolean isChecked) {
