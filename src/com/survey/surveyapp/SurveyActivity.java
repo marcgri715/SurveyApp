@@ -31,12 +31,6 @@ public class SurveyActivity extends ActionBarActivity {
 		list.setAdapter(adapter);
 		TextView questionContext = (TextView) findViewById(R.id.editText1);
 		questionContext.setText(Result.getInstance().getQuestion(questionIndex).getContext());
-		Button button = (Button) findViewById(R.id.previous_question_btn);
-		if (questionIndex==0) {
-			button.setActivated(false);
-		} else {
-			button.setActivated(true);
-		}
 	}
 
 	public void prevButtonClick(View view) {
@@ -50,12 +44,6 @@ public class SurveyActivity extends ActionBarActivity {
 			questionContext.setText(Result.getInstance().getQuestion(questionIndex).getContext());
 			Button button = (Button) findViewById(R.id.next_question_btn);
 			button.setText("Nastêpne");
-			button = (Button) findViewById(R.id.previous_question_btn);
-			if (questionIndex==0) {
-				button.setActivated(false);
-			} else {
-				button.setActivated(true);
-			}
 		}
 	}
 	
