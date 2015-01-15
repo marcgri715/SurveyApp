@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +21,10 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+		this.deleteDatabase("Survey.db");
+		Database dbHelper = new Database(this);
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		db.close();
 		setupStartButton();
 		//zaœlepka pod pytania
 		setupQuestions();
@@ -46,7 +50,6 @@ public class MainActivity extends ActionBarActivity {
 	private void setupStartButton() {
 		startButton = (Button) findViewById(R.id.button1);
 		startButton.setOnClickListener(new View.OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				// rozpocznij zabawê
