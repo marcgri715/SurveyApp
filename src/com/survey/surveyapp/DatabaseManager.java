@@ -56,4 +56,9 @@ public class DatabaseManager {
 		c.close();
 		return topic_id;
 	}
+	
+	// tutaj dodamy ankietê startow¹
+	public void setupStartingQuestions() {
+		
+	}
 }
