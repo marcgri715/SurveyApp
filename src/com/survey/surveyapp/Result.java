@@ -7,6 +7,7 @@ import java.util.List;
 public class Result {
 	private static Result instance = null;
 	private List<Question> questions = new ArrayList<Question>();
+	private int id;
 
 	public int getNumberOfQuestions() {
 		return questions.size();
@@ -23,7 +24,14 @@ public class Result {
 	public Question getQuestion(int index) {
 		return questions.get(index);
 	}
+	
+	public void setId(int pId) {
+		id = pId;
+	}
 
+	public int getId() {
+		return id;
+	}
 
 	private Result() {
 	}

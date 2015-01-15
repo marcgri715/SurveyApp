@@ -7,6 +7,15 @@ import java.util.List;
 public class Question implements Serializable {
 	private String context;
 	private List<Answer> answers = new ArrayList<Answer>();
+	private int id;
+	
+	public void setId(int pId) {
+		id = pId;
+	}
+
+	public int getId() {
+		return id;
+	}
 
 	public String getContext() {
 		return context;
