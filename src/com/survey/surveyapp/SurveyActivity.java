@@ -1,6 +1,7 @@
 package com.survey.surveyapp;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,33 +16,55 @@ public class SurveyActivity extends ActionBarActivity {
 	private ListAdapter adapter;
 	private Button nextBtn;
 	private int questionIndex;
+	private Context context;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		context = this;
 		setContentView(R.layout.activity_survey);
 		Intent intent = getIntent();
-		questionIndex = intent.getExtras().getInt("questionIndex");
-		if (questionIndex >= 0) {
-			adapter = new SurveyAdapter(this, Result
+		questionIndex = 0;
+		adapter = new SurveyAdapter(context, Result
+				.getInstance().getQuestion(questionIndex).getAnswers());
+		ListView list = (ListView) findViewById(R.id.question_listView);
+		list.setAdapter(adapter);
+		TextView questionContext = (TextView) findViewById(R.id.editText1);
+		questionContext.setText(Result.getInstance().getQuestion(questionIndex).getContext());
+	}
+
+	public void prevButtonClick(View view) {
+		if (questionIndex > 0) {
+			questionIndex--;
+			adapter = new SurveyAdapter(context, Result
 					.getInstance().getQuestion(questionIndex).getAnswers());
 			ListView list = (ListView) findViewById(R.id.question_listView);
 			list.setAdapter(adapter);
-			setupNextButton();
 			TextView questionContext = (TextView) findViewById(R.id.editText1);
 			questionContext.setText(Result.getInstance().getQuestion(questionIndex).getContext());
+			Button button = (Button) findViewById(R.id.next_question_btn);
+			button.setText("Nastêpne");
 		}
 	}
-
-	private void setupNextButton() {
-		nextBtn = (Button) findViewById(R.id.next_question_btn);
-		nextBtn.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				finish();
+	
+	public void nextButtonClick(View view) {
+		if (questionIndex < Result.getInstance().getNumberOfQuestions()-1) {
+			questionIndex++;
+			adapter = new SurveyAdapter(context, Result
+					.getInstance().getQuestion(questionIndex).getAnswers());
+			ListView list = (ListView) findViewById(R.id.question_listView);
+			list.setAdapter(adapter);
+			TextView questionContext = (TextView) findViewById(R.id.editText1);
+			questionContext.setText(Result.getInstance().getQuestion(questionIndex).getContext());
+			Button button = (Button) findViewById(R.id.next_question_btn);
+			if (questionIndex == Result.getInstance().getNumberOfQuestions()-1) {
+				button.setText("Zakoñcz");
+			} else {
+				button.setText("Nastêpne");
 			}
-		});
+		} else if (questionIndex == Result.getInstance().getNumberOfQuestions()-1) {
+			finish();
+		}
 	}
 
 	@Override

@@ -50,13 +50,9 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// rozpocznij zabawê
-				// Result.getInstance();
-				for (int i = 0; i < Result.getInstance().getNumberOfQuestions(); i++) {
-					Intent intent = new Intent(MainActivity.this,
-							SurveyActivity.class);
-					intent.putExtra("questionIndex", i);
-					MainActivity.this.startActivity(intent);
-				}
+				Intent intent = new Intent(MainActivity.this,
+						SurveyActivity.class);
+				MainActivity.this.startActivity(intent);
 			}
 		});
 	}
