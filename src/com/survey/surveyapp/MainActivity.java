@@ -24,10 +24,11 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		setupStartButton();
 		//zaœlepka pod pytania
-		this.deleteDatabase("Survey.db");
+		/* one-time use
 		DatabaseManager.getInstance().open(this);
 		DatabaseManager.getInstance().setupStartingQuestions();
 		DatabaseManager.getInstance().close();
+		*/
 	}
 	
 	private void getQuestions() {
