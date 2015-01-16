@@ -30,7 +30,7 @@ public class SurveyActivity extends ActionBarActivity {
 		ListView list = (ListView) findViewById(R.id.question_listView);
 		list.setAdapter(adapter);
 		TextView questionContext = (TextView) findViewById(R.id.editText1);
-		questionContext.setText(Result.getInstance().getQuestion(questionIndex).getContext());
+		questionContext.setText(Result.getInstance().getQuestion(questionIndex).getContent());
 	}
 
 	public void prevButtonClick(View view) {
@@ -41,7 +41,7 @@ public class SurveyActivity extends ActionBarActivity {
 			ListView list = (ListView) findViewById(R.id.question_listView);
 			list.setAdapter(adapter);
 			TextView questionContext = (TextView) findViewById(R.id.editText1);
-			questionContext.setText(Result.getInstance().getQuestion(questionIndex).getContext());
+			questionContext.setText(Result.getInstance().getQuestion(questionIndex).getContent());
 			Button button = (Button) findViewById(R.id.next_question_btn);
 			button.setText("Nastêpne");
 		}
@@ -55,7 +55,7 @@ public class SurveyActivity extends ActionBarActivity {
 			ListView list = (ListView) findViewById(R.id.question_listView);
 			list.setAdapter(adapter);
 			TextView questionContext = (TextView) findViewById(R.id.editText1);
-			questionContext.setText(Result.getInstance().getQuestion(questionIndex).getContext());
+			questionContext.setText(Result.getInstance().getQuestion(questionIndex).getContent());
 			Button button = (Button) findViewById(R.id.next_question_btn);
 			if (questionIndex == Result.getInstance().getNumberOfQuestions()-1) {
 				button.setText("Zakoñcz");

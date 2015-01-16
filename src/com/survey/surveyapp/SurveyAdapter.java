@@ -35,7 +35,7 @@ public class SurveyAdapter extends ArrayAdapter<Answer> {
 		holder = getItem(position);
 		checkbox = (CheckBox) row.findViewById(R.id.checkboxID);
 		checkbox.setChecked(holder.getValue());
-		checkbox.setText(holder.getContext());
+		checkbox.setText(holder.getContent());
 		checkbox.setTag(position);
 		checkbox.setOnClickListener(new CheckBox.OnClickListener() {
 			
