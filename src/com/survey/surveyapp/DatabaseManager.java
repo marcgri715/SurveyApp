@@ -36,6 +36,7 @@ public class DatabaseManager {
 	}
 	
 	public void close() {
+		db.close();
 		dbHelper.close();
 	}
 	
@@ -48,6 +49,7 @@ public class DatabaseManager {
 
 		for (String answer : question.tableOfAnswers)
 		{
+			cv = new ContentValues();
 			cv.put("ID_Pyt", question_id);
 			cv.put("Tresc", answer);
 			db.insert("Odpowiedz", null, cv);

@@ -24,17 +24,24 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		setupStartButton();
 		//zaœlepka pod pytania
+		this.deleteDatabase("Survey.db");
 		DatabaseManager.getInstance().open(this);
 		DatabaseManager.getInstance().setupStartingQuestions();
 		DatabaseManager.getInstance().close();
 	}
 	
 	private void getQuestions() {
-		int surveyIndex = Result.getInstance().getId(); //TODO
+		int surveyIndex = Result.getInstance().getId()+1; //TODO
 		List<Question> qlist = new ArrayList<Question>();
-		this.deleteDatabase("Survey.db");
 		Database dbHelper = new Database(this);
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		Cursor checker = db.query("Odpowiedz", null, null, null, null, null, null);
+		checker.moveToFirst();
+		do {
+			int id = checker.getInt(0);
+			String value = checker.getString(2);
+			int idpyt = checker.getInt(1);
+		} while (checker.moveToNext());
 		Cursor questionCursor = db.query("Pytanie", null, "ID_Tem=?", new String[] {Integer.toString(surveyIndex)}, null, null, null);
 		if (questionCursor.moveToFirst()) {
 			do {
@@ -42,7 +49,8 @@ public class MainActivity extends ActionBarActivity {
 				q.setId(questionCursor.getInt(0));
 				q.setContent(questionCursor.getString(2));
 				List<Answer> alist = new ArrayList<Answer>();
-				Cursor answerCursor = db.query("Odpowiedz", null, "ID_Pyt=?", new String[] {Integer.toString(q.getId())}, null, null, null);
+				int id = q.getId();
+				Cursor answerCursor = db.query("Odpowiedz", null, "ID_Pyt=?", new String[] {Integer.toString(id)}, null, null, null);
 				if (answerCursor.moveToFirst()) {
 					do {
 						Answer a = new Answer();
@@ -60,19 +68,6 @@ public class MainActivity extends ActionBarActivity {
 		Result.getInstance().setQuestions(qlist);
 		db.close();
 		dbHelper.close();
-		for (int i=0; i<3; i++) {
-			Question q = new Question();
-			q.setContent("Pytanie " + i);
-			List<Answer> alist = new ArrayList<Answer>();
-			for (int j=0; j<4; j++) {
-				Answer a = new Answer();
-				a.setContent("OdpowiedŸ " +j);
-				alist.add(a);
-			}
-			q.setAnswers(alist);
-			qlist.add(q);
-		}
-		Result.getInstance().setQuestions(qlist);
 	}
 
 	private void setupStartButton() {
