@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,24 +22,51 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		setupStartButton();
+		//zaœlepka pod pytania
+		getQuestions();
+	}
+	
+	private void getQuestions() {
+		int surveyIndex = 0; //TODO
+		Result.getInstance().setId(surveyIndex);
+		Result.getInstance().setContent("tytu³"); //TODO
+		List<Question> qlist = new ArrayList<Question>();
 		this.deleteDatabase("Survey.db");
 		Database dbHelper = new Database(this);
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		Cursor questionCursor = db.query("Pytanie", null, "ID_Tem=?", new String[] {Integer.toString(surveyIndex)}, null, null, null);
+		if (questionCursor.moveToFirst()) {
+			do {
+				Question q = new Question();
+				q.setId(questionCursor.getInt(0));
+				q.setContent(questionCursor.getString(2));
+				List<Answer> alist = new ArrayList<Answer>();
+				Cursor answerCursor = db.query("Odpowiedz", null, "ID_Pyt=?", new String[] {Integer.toString(q.getId())}, null, null, null);
+				if (answerCursor.moveToFirst()) {
+					do {
+						Answer a = new Answer();
+						a.setId(answerCursor.getInt(0));
+						a.setContent(answerCursor.getString(2));
+						alist.add(a);
+					} while (answerCursor.moveToNext());
+				}
+				q.setAnswers(alist);
+				answerCursor.close();
+				qlist.add(q);
+			} while (questionCursor.moveToNext());
+		}
+		questionCursor.close();
+		Result.getInstance().setQuestions(qlist);
 		db.close();
-		setupStartButton();
-		//zaœlepka pod pytania
-		setupQuestions();
-	}
-	
-	private void setupQuestions() {
-		List<Question> qlist = new ArrayList<Question>();
+		dbHelper.close();
 		for (int i=0; i<3; i++) {
 			Question q = new Question();
-			q.setContext("Pytanie " + i);
+			q.setContent("Pytanie " + i);
 			List<Answer> alist = new ArrayList<Answer>();
 			for (int j=0; j<4; j++) {
 				Answer a = new Answer();
-				a.setContext("OdpowiedŸ " +j);
+				a.setContent("OdpowiedŸ " +j);
 				alist.add(a);
 			}
 			q.setAnswers(alist);

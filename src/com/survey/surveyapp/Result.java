@@ -8,6 +8,15 @@ public class Result {
 	private static Result instance = null;
 	private List<Question> questions = new ArrayList<Question>();
 	private int id;
+	private String content;
+	
+	public void setContent(String pContent) {
+		content = pContent;
+	}
+	
+	public String getContent() {
+		return content;
+	}
 
 	public int getNumberOfQuestions() {
 		return questions.size();

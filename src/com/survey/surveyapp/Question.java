@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Question implements Serializable {
-	private String context;
+	private String content;
 	private List<Answer> answers = new ArrayList<Answer>();
 	private int id;
 	
@@ -17,12 +17,12 @@ public class Question implements Serializable {
 		return id;
 	}
 
-	public String getContext() {
-		return context;
+	public String getContent() {
+		return content;
 	}
 
-	public void setContext(String context) {
-		this.context = context;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public List<Answer> getAnswers() {

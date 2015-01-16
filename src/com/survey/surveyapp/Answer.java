@@ -3,7 +3,7 @@ package com.survey.surveyapp;
 import java.io.Serializable;
 
 public class Answer implements Serializable {
-	private String context;
+	private String content;
 	private boolean value;
 	private int id;
 	
@@ -15,12 +15,12 @@ public class Answer implements Serializable {
 		return id;
 	}
 
-	public String getContext() {
-		return context;
+	public String getContent() {
+		return content;
 	}
 
-	public void setContext(String context) {
-		this.context = context;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public boolean getValue() {
