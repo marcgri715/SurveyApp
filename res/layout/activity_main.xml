@@ -12,7 +12,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="Witaj podrozniku!" />
     
     <ListView 
         android:id="@+id/themeList"
@@ -27,6 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_toRightOf="@+id/textView1"
-        android:text="Button" />
+        android:text="Wypełnij" />
 
 </RelativeLayout>
