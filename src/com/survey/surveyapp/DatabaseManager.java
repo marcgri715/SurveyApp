@@ -64,36 +64,34 @@ public class DatabaseManager {
 	// tutaj dodamy ankietê startow¹
 	public void setupStartingQuestions() {
 		// tematy ankiet
-		long SurveyTopic1 = addNewSurveyTopic("Wiêcej ni¿ jedno zwierzê");
-		long SurveyTopic2 = addNewSurveyTopic("akieta2");
+		long SurveyTopic1 = addNewSurveyTopic("Samochody");
+		long SurveyTopic2 = addNewSurveyTopic("Œlubne preferencje");
 		
 		// odpowiedzi na pytania
-		String[] odp1_1 = { "asdf", "qwer", "zxcv", "qwerty" };
-		String[] odp1_2 = { "asdf", "qwer", "zxcv", "qwerty" };
-		String[] odp1_3 = { "asdf", "qwer", "zxcv", "qwerty" };
-		String[] odp1_4 = { "asdf", "qwer", "zxcv", "qwerty" };
-		String[] odp1_5 = { "asdf", "qwer", "zxcv", "qwerty" };
+		String[] odp1_1 = { "95", "98", "Diesel", "Gaz" };
+		String[] odp1_2 = { "Dojazd do pracy", "To moje narzêdzie pracy", "Wo¿ê rodzinê na zakupy i wycieczki", "¯eby siê pokazaæ", "U¿ywam samochodu sporadycznie" };
+		String[] odp1_3 = { "Michelin", "Dêbica", "Je¿d¿ê na felgach" };
+		String[] odp1_4 = { "Tak", "Nie", "Nie wiem" };
 		
-		String[] odp2_1 = { "asdf", "qwer", "zxcv", "qwerty" };
-		String[] odp2_2 = { "asdf", "qwer", "zxcv", "qwerty" };
-		String[] odp2_3 = { "asdf", "qwer", "zxcv", "qwerty" };
-		String[] odp2_4 = { "asdf", "qwer", "zxcv", "qwerty" };
-		String[] odp2_5 = { "asdf", "qwer", "zxcv", "qwerty" };
+		String[] odp2_1 = { "Jesieñ", "Zima", "Wiosna", "Lato" };
+		String[] odp2_2 = { "Plan w³asny", "qwer", "Magazun œlubny", "Rodzina i przyjaciele" };
+		String[] odp2_3 = { "0-50", "51-100", "101-200", "151 +" };
+		String[] odp2_4 = { "0-5,000€", "5,001-10,000€", "10,001-20,000€", "20,001€-50,000€", "50,001€ +" };
+		String[] odp2_5 = { "18-25", "26-35", "36-50", "51-60", "61 +" };
 		
 		// listy pytañ
 		List<QuestionObject> Questions1 = new ArrayList<QuestionObject>();
-		Questions1.add(new QuestionObject("Treœæ pytania?", odp1_1));
-		Questions1.add(new QuestionObject("Treœæ pytania?", odp1_2));
-		Questions1.add(new QuestionObject("Treœæ pytania?", odp1_3));
-		Questions1.add(new QuestionObject("Treœæ pytania?", odp1_4));
-		Questions1.add(new QuestionObject("Treœæ pytania?", odp1_5));
+		Questions1.add(new QuestionObject("Jakie paliwo tankujesz do swojego auta? ", odp1_1));
+		Questions1.add(new QuestionObject("Do czego na co dzieñ u¿ywasz swojego samochodu?", odp1_2));
+		Questions1.add(new QuestionObject("Opon jakiej firmy u¿ywasz na codzieñ?", odp1_3));
+		Questions1.add(new QuestionObject("Czy uwa¿asz, ¿e ta ankieta ma jakikolwiek sens?", odp1_4));
 		
 		List<QuestionObject> Questions2 = new ArrayList<QuestionObject>();
-		Questions2.add(new QuestionObject("Treœæ pytania?", odp2_1));
-		Questions2.add(new QuestionObject("Treœæ pytania?", odp2_2));
-		Questions2.add(new QuestionObject("Treœæ pytania?", odp2_3));
-		Questions2.add(new QuestionObject("Treœæ pytania?", odp2_4));
-		Questions2.add(new QuestionObject("Treœæ pytania?", odp2_5));
+		Questions2.add(new QuestionObject("O jakiej porze roku planujesz wesele?", odp2_1));
+		Questions2.add(new QuestionObject("Jak zamierzasz zaplanowaæ œlub?", odp2_2));
+		Questions2.add(new QuestionObject("Ilu goœci oczekujesz?", odp2_3));
+		Questions2.add(new QuestionObject("Jaki jest Twój planowany bud¿et weselny?", odp2_4));
+		Questions2.add(new QuestionObject("Jaki jest uœredniony wiek pañstwa m³odych?", odp2_5));
 		
 		// dorzucanie pytañ z odpowiedziami do akniet
 		for (QuestionObject QO : Questions1)
