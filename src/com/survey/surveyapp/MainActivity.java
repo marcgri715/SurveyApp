@@ -27,10 +27,12 @@ public class MainActivity extends ActionBarActivity {
 		setupStartButton();
 		showList();
 		//zaœlepka pod pytania
+		/* SINGLE-TIME USE
 		this.deleteDatabase("Survey.db");
 		DatabaseManager.getInstance().open(this);
 		DatabaseManager.getInstance().setupStartingQuestions();
 		DatabaseManager.getInstance().close();
+		*/
 	}
 	
 	private void getQuestions() {

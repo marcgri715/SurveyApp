@@ -65,6 +65,9 @@ public class SurveyActivity extends ActionBarActivity {
 		} else if (questionIndex == Result.getInstance().getNumberOfQuestions()-1) {
 			Intent intent = new Intent(this, ResultsActivity.class);
 			this.startActivity(intent);
+			DatabaseManager.getInstance().open(this);
+			DatabaseManager.getInstance().insertKeys();
+			DatabaseManager.getInstance().close();
 			finish();
 		}
 	}
