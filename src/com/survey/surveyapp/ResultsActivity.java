@@ -42,6 +42,6 @@ public class ResultsActivity extends ActionBarActivity {
 	}
 	
 	public void returnButtonClick(View view) {
-		
+		finish();
 	}
 }
