@@ -40,8 +40,10 @@ public class DatabaseManager {
 		dbHelper.close();
 	}
 	
-	public void getTopics (Context context) {
+	public List<String> getTopics (Context context) {
+		List<String> topicList = new ArrayList<String>();
 		
+		return topicList;
 	}
 	
 	public void getQuestions(Context context, int surveyIndex) {
