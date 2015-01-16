@@ -63,6 +63,8 @@ public class SurveyActivity extends ActionBarActivity {
 				button.setText("Nastêpne");
 			}
 		} else if (questionIndex == Result.getInstance().getNumberOfQuestions()-1) {
+			Intent intent = new Intent(this, ResultsActivity.class);
+			this.startActivity(intent);
 			finish();
 		}
 	}
