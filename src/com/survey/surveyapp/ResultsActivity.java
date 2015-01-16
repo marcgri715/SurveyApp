@@ -23,17 +23,22 @@ public class ResultsActivity extends ActionBarActivity {
         List<String> items = new ArrayList<String>();// = DatabaseManager.getInstance().getAnswers();
         
         List<Question> questionsList = Result.getInstance().getQuestions();
-
+        StringBuilder sb = new StringBuilder();
+        
         for (Question q : questionsList) {
         	String question = q.getContent();
         	List<Answer> answersList = q.getAnswers();
-        	String answers = "";
+        	sb.setLength(0);			// czyszczê stringa
+        	//String answers = "";
         	for (Answer a : answersList) {
         		if (a.getValue()) {
-	        		answers += '\n' + a.getContent();
+        			sb.append('\n');
+        			sb.append(a.getContent());
+	        		//answers += '\n' + a.getContent();
         		}
         	}        		
-        	items.add(question + answers);
+        	sb.insert(0, question);
+        	items.add(sb.toString());
         }
         
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
