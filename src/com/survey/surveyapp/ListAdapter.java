@@ -13,6 +13,8 @@ public class ListAdapter extends ArrayAdapter<String> {
 
 	public List<String> topicList;
 	private final Context context;
+	private RadioButton lastSelectedRB;
+	private int lastSelectedRBIndex;
 	
 	public ListAdapter(Context _context, List<String> _topicList) {
 		super(_context, R.layout.topic_item, _topicList);
@@ -31,7 +33,10 @@ public class ListAdapter extends ArrayAdapter<String> {
 
 			@Override
 			public void onClick(View _view) {
-				//machnij se to co Ci potrzebne bo nie bede mieszac:P
+				if (lastSelectedRBIndex != position && lastSelectedRB!=null)
+					lastSelectedRB.setChecked(false);
+				lastSelectedRB = (RadioButton)_view;
+				lastSelectedRBIndex = position;
 			}
 		});
 						
