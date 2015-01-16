@@ -27,7 +27,6 @@ public class ListAdapter extends ArrayAdapter<String> {
 		RadioButton radioButton = (RadioButton) view.findViewById(R.id.topic_radio);
 		String selectedButtonName = getItem(position);
 		radioButton.setText(selectedButtonName);
-		radioButton.setTag(position+1);
 		radioButton.setOnClickListener(new RadioButton.OnClickListener() {
 
 			@Override
@@ -36,7 +35,7 @@ public class ListAdapter extends ArrayAdapter<String> {
 					lastSelectedRB.setChecked(false);
 				lastSelectedRB = (RadioButton)_view;
 				lastSelectedRBIndex = position;
-				Result.getInstance().setId(position + 1);
+				Result.getInstance().setId(position);
 				Result.getInstance().setContent(topicList.get(position));
 			}
 		});
