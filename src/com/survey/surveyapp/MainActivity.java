@@ -13,16 +13,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 public class MainActivity extends ActionBarActivity {
 
 	private Button startButton;
+	private List<String> topicList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setupStartButton();
+		showList();
 		//zaœlepka pod pytania
 		/* one-time use
 		DatabaseManager.getInstance().open(this);
@@ -50,6 +53,20 @@ public class MainActivity extends ActionBarActivity {
 				MainActivity.this.startActivity(intent);
 			}
 		});
+	}
+	
+	private void showList(){
+		String[] radioButtonNames;
+		Intent fromMainActivity = getIntent();
+		int numberOfButtons = fromMainActivity.getExtras().getInt("toCreate");
+		radioButtonNames = new String[numberOfButtons];
+		for (int i=0; i<numberOfButtons; i++) {
+			radioButtonNames[i] = "Przycisk " + String.valueOf(i+1);
+		}
+		topicList = DatabaseManager.getInstance().getTopics();
+		ListAdapter adapter = new ListAdapter(this, topicList);
+		ListView list = (ListView) findViewById(R.layout.activity_main);
+		list.setAdapter(adapter);
 	}
 
 	@Override
