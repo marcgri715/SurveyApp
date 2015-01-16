@@ -79,7 +79,6 @@ public class DatabaseManager {
 		Result.getInstance().setQuestions(qlist);
 	}
 	
-	
 	// id_tematu, pytanie z odpowiedziami
 	public void addNewQuestion(long topic_id, QuestionObject question) {
 		ContentValues cv = new ContentValues();
