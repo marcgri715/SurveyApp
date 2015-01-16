@@ -15,7 +15,6 @@ public class DatabaseManager {
 	private static DatabaseManager instance = null;
 	
 	private DatabaseManager() {
-	//	dbHelper = new Database(this);
 	}
 	
 	public static DatabaseManager getInstance() {
