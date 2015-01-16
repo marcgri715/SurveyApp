@@ -34,7 +34,7 @@ public class MainActivity extends ActionBarActivity {
 	private void getQuestions() {
 		int surveyIndex = Result.getInstance().getId()+1; //TODO
 		DatabaseManager.getInstance().open(this);
-		DatabaseManager.getInstance().getQuestions(this, surveyIndex);
+		DatabaseManager.getInstance().getQuestions(surveyIndex);
 		DatabaseManager.getInstance().close();
 	}
 

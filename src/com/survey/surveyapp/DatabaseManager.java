@@ -40,7 +40,7 @@ public class DatabaseManager {
 		dbHelper.close();
 	}
 	
-	public List<String> getTopics (Context context) {
+	public List<String> getTopics () {
 		List<String> topicList = new ArrayList<String>();
 		Cursor topicCursor = db.query("Temat", new String[] { "Nazwa" }, null, null, null, null, null);
 		if (topicCursor.moveToFirst()) {
@@ -52,7 +52,7 @@ public class DatabaseManager {
 		return topicList;
 	}
 	
-	public void getQuestions(Context context, int surveyIndex) {
+	public void getQuestions(int surveyIndex) {
 		List<Question> qlist = new ArrayList<Question>();
 		Cursor questionCursor = db.query("Pytanie", null, "ID_Tem=?", new String[] {Integer.toString(surveyIndex)}, null, null, null);
 		if (questionCursor.moveToFirst()) {
