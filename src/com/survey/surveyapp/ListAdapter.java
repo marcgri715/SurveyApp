@@ -24,7 +24,6 @@ public class ListAdapter extends ArrayAdapter<String> {
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = LayoutInflater.from(getContext());
 		View view = inflater.inflate(R.layout.topic_item, parent, false);
-		View temp = view.findViewById(R.id.topic_radio);
 		RadioButton radioButton = (RadioButton) view.findViewById(R.id.topic_radio);
 		String selectedButtonName = getItem(position);
 		radioButton.setText(selectedButtonName);
@@ -37,6 +36,8 @@ public class ListAdapter extends ArrayAdapter<String> {
 					lastSelectedRB.setChecked(false);
 				lastSelectedRB = (RadioButton)_view;
 				lastSelectedRBIndex = position;
+				Result.getInstance().setId(position + 1);
+				Result.getInstance().setContent(topicList.get(position));
 			}
 		});
 						
