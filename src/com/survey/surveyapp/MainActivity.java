@@ -27,15 +27,14 @@ public class MainActivity extends ActionBarActivity {
 		setupStartButton();
 		showList();
 		//zaœlepka pod pytania
-		/* one-time use
+		this.deleteDatabase("Survey.db");
 		DatabaseManager.getInstance().open(this);
 		DatabaseManager.getInstance().setupStartingQuestions();
 		DatabaseManager.getInstance().close();
-		*/
 	}
 	
 	private void getQuestions() {
-		int surveyIndex = Result.getInstance().getId()+1; //TODO
+		int surveyIndex = Result.getInstance().getId()+1;
 		DatabaseManager.getInstance().open(this);
 		DatabaseManager.getInstance().getQuestions(surveyIndex);
 		DatabaseManager.getInstance().close();
@@ -56,16 +55,11 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	private void showList(){
-		String[] radioButtonNames;
-		Intent fromMainActivity = getIntent();
-		int numberOfButtons = fromMainActivity.getExtras().getInt("toCreate");
-		radioButtonNames = new String[numberOfButtons];
-		for (int i=0; i<numberOfButtons; i++) {
-			radioButtonNames[i] = "Przycisk " + String.valueOf(i+1);
-		}
+		DatabaseManager.getInstance().open(this);
 		topicList = DatabaseManager.getInstance().getTopics();
+		DatabaseManager.getInstance().close();
 		ListAdapter adapter = new ListAdapter(this, topicList);
-		ListView list = (ListView) findViewById(R.layout.activity_main);
+		ListView list = (ListView) findViewById(R.id.themeList);
 		list.setAdapter(adapter);
 	}
 
