@@ -39,7 +39,6 @@ public class Database extends SQLiteOpenHelper{
 				+ "foreign key(ID_RezPyt) references RezPytanie(ID_RezPyt))");		
 		}
 		catch(Exception ex){
-			String exc = ex.getMessage();
 			ex.printStackTrace();
 		}
 		
