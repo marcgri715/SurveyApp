@@ -33,42 +33,9 @@ public class MainActivity extends ActionBarActivity {
 	
 	private void getQuestions() {
 		int surveyIndex = Result.getInstance().getId()+1; //TODO
-		List<Question> qlist = new ArrayList<Question>();
-		Database dbHelper = new Database(this);
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		Cursor checker = db.query("Odpowiedz", null, null, null, null, null, null);
-		checker.moveToFirst();
-		do {
-			int id = checker.getInt(0);
-			String value = checker.getString(2);
-			int idpyt = checker.getInt(1);
-		} while (checker.moveToNext());
-		Cursor questionCursor = db.query("Pytanie", null, "ID_Tem=?", new String[] {Integer.toString(surveyIndex)}, null, null, null);
-		if (questionCursor.moveToFirst()) {
-			do {
-				Question q = new Question();
-				q.setId(questionCursor.getInt(0));
-				q.setContent(questionCursor.getString(2));
-				List<Answer> alist = new ArrayList<Answer>();
-				int id = q.getId();
-				Cursor answerCursor = db.query("Odpowiedz", null, "ID_Pyt=?", new String[] {Integer.toString(id)}, null, null, null);
-				if (answerCursor.moveToFirst()) {
-					do {
-						Answer a = new Answer();
-						a.setId(answerCursor.getInt(0));
-						a.setContent(answerCursor.getString(2));
-						alist.add(a);
-					} while (answerCursor.moveToNext());
-				}
-				q.setAnswers(alist);
-				answerCursor.close();
-				qlist.add(q);
-			} while (questionCursor.moveToNext());
-		}
-		questionCursor.close();
-		Result.getInstance().setQuestions(qlist);
-		db.close();
-		dbHelper.close();
+		DatabaseManager.getInstance().open(this);
+		DatabaseManager.getInstance().getQuestions(this, surveyIndex);
+		DatabaseManager.getInstance().close();
 	}
 
 	private void setupStartButton() {

@@ -40,10 +40,12 @@ public class DatabaseManager {
 		dbHelper.close();
 	}
 	
+	public void getTopics (Context context) {
+		
+	}
+	
 	public void getQuestions(Context context, int surveyIndex) {
-		dbHelper = new Database(context);
 		List<Question> qlist = new ArrayList<Question>();
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		Cursor checker = db.query("Odpowiedz", null, null, null, null, null, null);
 		checker.moveToFirst();
 		do {
@@ -75,8 +77,6 @@ public class DatabaseManager {
 		}
 		questionCursor.close();
 		Result.getInstance().setQuestions(qlist);
-		db.close();
-		dbHelper.close();
 	}
 	
 	
