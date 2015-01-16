@@ -42,19 +42,18 @@ public class DatabaseManager {
 	
 	public List<String> getTopics (Context context) {
 		List<String> topicList = new ArrayList<String>();
-		
+		Cursor topicCursor = db.query("Temat", new String[] { "Nazwa" }, null, null, null, null, null);
+		if (topicCursor.moveToFirst()) {
+			do {
+				String topic = topicCursor.getString(0);
+				topicList.add(topic);
+			} while (topicCursor.moveToNext());
+		}
 		return topicList;
 	}
 	
 	public void getQuestions(Context context, int surveyIndex) {
 		List<Question> qlist = new ArrayList<Question>();
-		Cursor checker = db.query("Odpowiedz", null, null, null, null, null, null);
-		checker.moveToFirst();
-		do {
-			int id = checker.getInt(0);
-			String value = checker.getString(2);
-			int idpyt = checker.getInt(1);
-		} while (checker.moveToNext());
 		Cursor questionCursor = db.query("Pytanie", null, "ID_Tem=?", new String[] {Integer.toString(surveyIndex)}, null, null, null);
 		if (questionCursor.moveToFirst()) {
 			do {
