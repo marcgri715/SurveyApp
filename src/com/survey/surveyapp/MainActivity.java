@@ -24,13 +24,13 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		setupStartButton();
 		//zaœlepka pod pytania
-		getQuestions();
+		DatabaseManager.getInstance().open(this);
+		DatabaseManager.getInstance().setupStartingQuestions();
+		DatabaseManager.getInstance().close();
 	}
 	
 	private void getQuestions() {
-		int surveyIndex = 0; //TODO
-		Result.getInstance().setId(surveyIndex);
-		Result.getInstance().setContent("tytu³"); //TODO
+		int surveyIndex = Result.getInstance().getId(); //TODO
 		List<Question> qlist = new ArrayList<Question>();
 		this.deleteDatabase("Survey.db");
 		Database dbHelper = new Database(this);
@@ -81,6 +81,7 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// rozpocznij zabawê
+				getQuestions();
 				Intent intent = new Intent(MainActivity.this,
 						SurveyActivity.class);
 				MainActivity.this.startActivity(intent);
