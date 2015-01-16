@@ -28,8 +28,16 @@ public class Question implements Serializable {
 	public List<Answer> getAnswers() {
 		return answers;
 	}
+	
+	public Answer getAnswer(int index) {
+		return answers.get(index);
+	}
 
 	public void setAnswers(List<Answer> answers) {
 		this.answers = answers;
+	}
+	
+	public int getNumberOfAnswers() {
+		return answers.size();
 	}
 }

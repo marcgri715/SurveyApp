@@ -13,7 +13,7 @@ public class AnswerManager {
 		numberOfAnswers = result.getInstance().getQuestion(questionIndex).getAnswers().size();
 		
 		for (int j = 0; j < numberOfAnswers; j++) {
-			insertAnswer(answer.getId(), answer.getValue(), result.getQuestion(questionIndex).getId());
+			
 		}			
 		
 	}
@@ -32,30 +32,6 @@ public class AnswerManager {
 		cv.clear();		
 	}
 	
-	public void insertKeys(Answer answer, Question question) {
-		ContentValues cv = new ContentValues();
-		int topicId = Result.getInstance().getId();	
-		int questionId = question.getId();
-		int answerId = answer.getId();
-		
-		cv.put("ID_Tem", topicId);
-		topicId = (int) db.insert("RezTemat", null, cv);
-		cv.clear();
-		
-		cv.put("ID_RezTem", topicId);
-		db.insert("RezPytanie", null, cv);
-		cv.clear();		
-		
-		for (int i = 0; i < question.getAnswers().size(); i++) {
-			cv.put("ID_Pyt", questionId);
-			questionId = (int) db.insert("RezQuestion", null, cv);
-			
-			db.insert("RezPytanie", null, cv);
-		}
-		
-		
-		cv.put("ID_Tem", topicId);
-		db.insert("RezTemat", null, cv);
-		cv.clear();		
-	}	
+	
 }
+//do skasowania

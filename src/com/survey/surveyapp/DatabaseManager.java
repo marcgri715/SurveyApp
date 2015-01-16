@@ -141,4 +141,35 @@ public class DatabaseManager {
 		for (QuestionObject QO : Questions2)
 			addNewQuestion(SurveyTopic2, QO);
 	}
+	
+	public void insertKeys() {
+		ContentValues cv = new ContentValues();
+		long topicId = Result.getInstance().getId();
+		
+		cv.put("ID_Tem", topicId);
+		long resTopicId = db.insert("RezTemat", null, cv);
+		cv.clear();
+		
+		for (int i=0; i<Result.getInstance().getNumberOfQuestions(); i++) {
+			long questionId = Result.getInstance().getQuestion(i).getId();
+			cv.put("ID_RezTem", resTopicId);
+			cv.put("ID_Pyt", questionId);
+			long resAnswerId = db.insert("RezPytanie", null, cv);
+			cv.clear();
+			
+			for (int j=0; j<Result.getInstance().getQuestion(i).getNumberOfAnswers(); j++) {
+				long answerId = Result.getInstance().getQuestion(i).getAnswer(j).getId();
+				int result;
+				if (Result.getInstance().getQuestion(i).getAnswer(j).getValue()) {
+					result = 1;
+				} else {
+					result = 0;
+				}
+				cv.put("ID_RezPyt", resAnswerId);
+				cv.put("ID_Odp", answerId);
+				cv.put("Wynik", result);
+				db.insert("RezOdpowiedz", null, cv);
+			}
+		}
+	}	
 }

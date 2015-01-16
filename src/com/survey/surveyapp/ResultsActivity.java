@@ -12,7 +12,7 @@ public class ResultsActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_results);
 		
-		ListView listView1 = (ListView) findViewById(R.id.results_ListView);
+		ListView listView1 = (ListView) findViewById(R.id.results_listView);
         
         String[] items = {  };
         
