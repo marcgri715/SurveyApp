@@ -16,12 +16,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class QuestionItemAdapter extends ArrayAdapter<Question> implements OnKeyListener {
 
-	private Button btn_add;
-	private Button btn_remove;
+	private ImageButton btn_add;
+	private ImageButton btn_remove;
 	private CheckBox chk_question;
 	private EditText et_question;
 	private List<Boolean> CheckedAnswers;
@@ -44,8 +45,8 @@ public class QuestionItemAdapter extends ArrayAdapter<Question> implements OnKey
         lv_answers = (ListView)row.findViewById(R.id.answersList);
         lv_answers.setAdapter(adapter);
         
-		btn_add = (Button)row.findViewById(R.id.btn_add_answer);
-		btn_remove = (Button)row.findViewById(R.id.btn_remove_answers);
+		btn_add = (ImageButton)row.findViewById(R.id.btn_add_answer);
+		btn_remove = (ImageButton)row.findViewById(R.id.btn_remove_answers);
 		chk_question = (CheckBox)row.findViewById(R.id.chk_question);
 		et_question = (EditText)row.findViewById(R.id.et_question);
 		//Result.getInstance().getQuestion(index);

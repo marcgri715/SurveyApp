@@ -16,6 +16,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class CreatorActivity extends ActionBarActivity implements OnKeyListener {
 
@@ -26,8 +27,12 @@ public class CreatorActivity extends ActionBarActivity implements OnKeyListener 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_creator_main);
 		Result.getInstance().setContent("");
-		Result.getInstance().setQuestions(new ArrayList<Question>(1));
-		Result.getInstance().getQuestion(0).setAnswers(new ArrayList<Answer>(1));
+		List<Question> qs = new ArrayList<Question>();
+		qs.add(new Question());
+		List<Answer> as = new ArrayList<Answer>();
+		as.add(new Answer());
+		qs.get(0).setAnswers(as);
+		Result.getInstance().setQuestions(qs);
 		EditText editText = (EditText) findViewById(R.id.et_topic);
 		editText.setOnKeyListener(this);
 		ListView listView = (ListView) findViewById(R.id.questionsList);
@@ -61,6 +66,8 @@ public class CreatorActivity extends ActionBarActivity implements OnKeyListener 
 			DatabaseManager.getInstance().addNewQuestion(id, question);
 		}
 		DatabaseManager.getInstance().close();
+		Toast.makeText(view.getContext(), "UDA£O MI SIÊ!", Toast.LENGTH_SHORT).show();
+		finish();
 	}
 	
 	public void addNewQuestionButton (View view) {

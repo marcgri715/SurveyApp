@@ -70,6 +70,11 @@ public class MainActivity extends ActionBarActivity {
 		ListView list = (ListView) findViewById(R.id.themeList);
 		list.setAdapter(adapter);
 	}
+	
+	public void createSurvey(View view) {
+		Intent intent = new Intent(MainActivity.this, CreatorActivity.class);
+		MainActivity.this.startActivity(intent);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

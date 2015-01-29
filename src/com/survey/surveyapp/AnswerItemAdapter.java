@@ -32,8 +32,8 @@ public class AnswerItemAdapter extends ArrayAdapter<Answer> implements OnKeyList
 
 		Answer holder = null;
     	View row = convertView;
-    	LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-    	row = inflater.inflate(R.layout.activity_creator_answer, parent, false);
+    	LayoutInflater inflater = LayoutInflater.from(getContext());
+		row = inflater.inflate(R.layout.activity_creator_answer, parent, false);
     	holder = getItem(position);
     	answerContent = (EditText) row.findViewById(R.id.et_answer);
         answerContent.setOnKeyListener(this);
