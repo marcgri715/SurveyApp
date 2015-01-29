@@ -12,12 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
 public class CreatorActivity extends ActionBarActivity implements OnKeyListener {
 
-	private ListAdapter adapter;
+	private ArrayAdapter adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,13 @@ public class CreatorActivity extends ActionBarActivity implements OnKeyListener 
 	}
 	
 	public void deleteQuestionsButton (View view) {
-		
+		int deleted = 0;
+		for (Question q : Result.getInstance().getQuestions()) {
+			if (q.isAnswered()) {
+				Result.getInstance().getQuestions().remove(q.getId() - deleted++);
+			}
+		}
+		adapter.notifyDataSetChanged();
 	}
 
 	@Override
