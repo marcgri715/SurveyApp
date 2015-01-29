@@ -86,8 +86,7 @@ public class DatabaseManager {
 		cv.put("Tresc", question.content);
 		long question_id = db.insert("Pytanie", null, cv);
 
-		for (String answer : question.tableOfAnswers)
-		{
+		for (String answer : question.tableOfAnswers) {
 			cv = new ContentValues();
 			cv.put("ID_Pyt", question_id);
 			cv.put("Tresc", answer);
