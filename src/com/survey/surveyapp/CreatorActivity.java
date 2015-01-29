@@ -13,9 +13,12 @@ import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ListView;
 
 public class CreatorActivity extends ActionBarActivity implements OnKeyListener {
 
+	private ListAdapter adapter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,6 +28,9 @@ public class CreatorActivity extends ActionBarActivity implements OnKeyListener 
 		Result.getInstance().getQuestion(0).setAnswers(new ArrayList<Answer>(1));
 		EditText editText = (EditText) findViewById(R.id.et_topic);
 		editText.setOnKeyListener(this);
+		ListView listView = (ListView) findViewById(R.id.questionsList);
+		adapter = new QuestionItemAdapter(this, Result.getInstance().getQuestions());
+		listView.setAdapter(adapter);
 	}
 	
 	@Override
@@ -39,6 +45,18 @@ public class CreatorActivity extends ActionBarActivity implements OnKeyListener 
 		} else {
 			return false;
 		}
+	}
+	
+	public void addNewQuestionButton (View view) {
+		Result.getInstance().getQuestions().add(new Question());
+		int index = Result.getInstance().getNumberOfQuestions();
+		Result.getInstance().getQuestion(index).setAnswers(new ArrayList<Answer>(1));
+		//wystarczy?
+		adapter.notifyDataSetChanged();
+	}
+	
+	public void deleteQuestionsButton (View view) {
+		
 	}
 
 	@Override
