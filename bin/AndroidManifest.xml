@@ -26,8 +26,11 @@
             android:name=".SurveyActivity"
             android:label="@string/title_activity_survey" >
         </activity>
-                <activity
-            android:name=".ResultsActivity" >
+        <activity android:name=".ResultsActivity" >
+        </activity>
+        <activity
+            android:name=".CreatorActivity"
+            android:label="@string/title_activity_creator" >
         </activity>
     </application>
 
