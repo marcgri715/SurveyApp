@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class AnswerItemAdapter extends ArrayAdapter<Answer> implements OnKeyListener{
 
@@ -51,9 +50,7 @@ public class AnswerItemAdapter extends ArrayAdapter<Answer> implements OnKeyList
 				layoutResourceId.get((Integer)v.getTag()).setValue(clicked.isChecked());
 			}
 		});
-        holder.setId(position);
-        
-        
+        holder.setId(position);       
         return row;
 
    }
