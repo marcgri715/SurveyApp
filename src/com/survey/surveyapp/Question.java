@@ -8,6 +8,15 @@ public class Question implements Serializable {
 	private String content;
 	private List<Answer> answers = new ArrayList<Answer>();
 	private int id;
+	private boolean answered;
+	
+	public boolean isAnswered () {
+		return answered;
+	}
+	
+	public void setAnsweredFlag (boolean pAns) {
+		answered = pAns;
+	}
 	
 	public void setId(int pId) {
 		id = pId;

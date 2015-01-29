@@ -1,5 +1,8 @@
 package com.survey.surveyapp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.support.v7.app.ActionBarActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +14,7 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SurveyActivity extends ActionBarActivity {
 	private ListAdapter adapter;
@@ -35,6 +39,13 @@ public class SurveyActivity extends ActionBarActivity {
 
 	public void prevButtonClick(View view) {
 		if (questionIndex > 0) {
+			Result.getInstance().getQuestion(questionIndex).setAnsweredFlag(false);
+			for (Answer a : Result.getInstance().getQuestion(questionIndex).getAnswers()) {
+				if (a.getValue()) {
+					Result.getInstance().getQuestion(questionIndex).setAnsweredFlag(true);
+					break;
+				}
+			}
 			questionIndex--;
 			adapter = new SurveyAdapter(context, Result
 					.getInstance().getQuestion(questionIndex).getAnswers());
@@ -48,6 +59,13 @@ public class SurveyActivity extends ActionBarActivity {
 	}
 	
 	public void nextButtonClick(View view) {
+		Result.getInstance().getQuestion(questionIndex).setAnsweredFlag(false);
+		for (Answer a : Result.getInstance().getQuestion(questionIndex).getAnswers()) {
+			if (a.getValue()) {
+				Result.getInstance().getQuestion(questionIndex).setAnsweredFlag(true);
+				break;
+			}
+		}
 		if (questionIndex < Result.getInstance().getNumberOfQuestions()-1) {
 			questionIndex++;
 			adapter = new SurveyAdapter(context, Result
@@ -63,12 +81,23 @@ public class SurveyActivity extends ActionBarActivity {
 				button.setText("Nastêpne");
 			}
 		} else if (questionIndex == Result.getInstance().getNumberOfQuestions()-1) {
-			Intent intent = new Intent(this, ResultsActivity.class);
-			this.startActivity(intent);
-			DatabaseManager.getInstance().open(this);
-			DatabaseManager.getInstance().insertKeys();
-			DatabaseManager.getInstance().close();
-			finish();
+			boolean isFinished = true;
+			for (Question q : Result.getInstance().getQuestions()) {
+				if (!q.isAnswered()) {
+					isFinished = false;
+					break;
+				}
+			}
+			if (isFinished) {
+				Intent intent = new Intent(this, ResultsActivity.class);
+				this.startActivity(intent);
+				DatabaseManager.getInstance().open(this);
+				DatabaseManager.getInstance().insertKeys();
+				DatabaseManager.getInstance().close();
+				finish();
+			} else {
+				Toast.makeText(this, "Nie odpowiedziano na wszystkie pytania!", Toast.LENGTH_SHORT).show();
+			}
 		}
 	}
 
