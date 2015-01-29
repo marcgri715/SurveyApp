@@ -31,21 +31,21 @@
         android:ems="10"
         android:text="Podaj treść pytania.." />
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_remove_answers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/answersList"
         android:layout_below="@+id/checkBox"
-        android:text="-" />
+        android:src="@android:drawable/ic_input_delete"/> />
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_add_answer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/btn_remove_answers"
         android:layout_alignBottom="@+id/btn_remove_answers"
         android:layout_toRightOf="@+id/btn_remove_answers"
-        android:text="+" />
+        android:src="@android:drawable/ic_input_add"/> />
 
 </RelativeLayout>

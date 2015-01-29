@@ -21,21 +21,29 @@
         android:layout_below="@+id/btn_remove_questions" >
     </ListView>
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_add_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/et_topic"
         android:layout_below="@+id/et_topic"
-        android:text="+" />
+        android:src="@android:drawable/ic_input_add" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_remove_questions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/btn_add_question"
         android:layout_alignBottom="@+id/btn_add_question"
         android:layout_toRightOf="@+id/btn_add_question"
-        android:text="-" />
+        android:src="@android:drawable/ic_input_delete"/>
+
+    <Button
+        android:id="@+id/btn_save_survey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btn_remove_questions"
+        android:layout_toRightOf="@+id/btn_remove_questions"
+        android:text="Zapisz ankietę" />
 
 </RelativeLayout>
