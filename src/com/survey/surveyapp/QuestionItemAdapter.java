@@ -23,7 +23,7 @@ public class QuestionItemAdapter extends ArrayAdapter<Question> {
 	private EditText et_question;
 	private List<Boolean> CheckedAnswers;
 	private ListView lv_answers; 
-	ArrayAdapter adapter;
+	private ArrayAdapter adapter;
 	
 	public QuestionItemAdapter(Context _context, List<Question> _questions) {
 		super(_context, R.layout.activity_creator_question, _questions);
@@ -33,33 +33,39 @@ public class QuestionItemAdapter extends ArrayAdapter<Question> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View row = convertView;
 
+		
+		LayoutInflater inflater = LayoutInflater.from(getContext());
+		row = inflater.inflate(R.layout.activity_creator_question, parent, false);
+		
 		adapter = new AnswerItemAdapter(this.getContext(), Result.getInstance().getQuestion(position).getAnswers());
         lv_answers = (ListView)row.findViewById(R.id.answersList);
         lv_answers.setAdapter(adapter);
-		LayoutInflater inflater = ((Activity) context).getLayoutInflate();
         
 		btn_add = (Button)row.findViewById(R.id.btn_add_answer);
 		btn_remove = (Button)row.findViewById(R.id.btn_remove_answers);
 		chk_question = (CheckBox)row.findViewById(R.id.chk_question);
 		et_question = (EditText)row.findViewById(R.id.et_question);
 		//Result.getInstance().getQuestion(index);
-		setupRemoveButton();		
+		setupRemoveButton();	
+		setupAddButton();
 		return row;
 	}
 	
-
 	public void setupRemoveButton() {
 		btn_remove.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				List<Answer> answers = Result.getInstance().getQuestion(v.getId()).getAnswers();	// getId?
+				ListView l = (ListView)v.findViewById(R.id.answersList);
 				int deleted = 0;
 				for (Answer a : answers) {
 					if (a.getValue()) {
 						answers.remove(a.getId() - deleted++);	// getId?
-						adapter.remove(a);
+						//adapter.remove(a);
 					}
 				}
+				AnswerItemAdapter adp = (AnswerItemAdapter)l.getAdapter();		// MIEJSCE WRAZLIWE
+				adp.notifyDataSetChanged();			
 			}
 		});
 	}
