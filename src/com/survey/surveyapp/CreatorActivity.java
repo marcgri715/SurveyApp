@@ -1,6 +1,7 @@
 package com.survey.surveyapp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -46,6 +47,20 @@ public class CreatorActivity extends ActionBarActivity implements OnKeyListener 
 		} else {
 			return false;
 		}
+	}
+	
+	public void finishSurveyButton (View view) {
+		DatabaseManager.getInstance().open(view.getContext());
+		long id = DatabaseManager.getInstance().addNewSurveyTopic(Result.getInstance().getContent());
+		for (Question q : Result.getInstance().getQuestions()) {
+			String[] answ = new String[q.getNumberOfAnswers()];
+			for (Answer a : q.getAnswers()) {
+				answ[a.getId()] = a.getContent();
+			}
+			QuestionObject question = new QuestionObject(q.getContent(), answ);
+			DatabaseManager.getInstance().addNewQuestion(id, question);
+		}
+		DatabaseManager.getInstance().close();
 	}
 	
 	public void addNewQuestionButton (View view) {

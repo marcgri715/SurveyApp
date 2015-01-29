@@ -37,11 +37,11 @@ public class AnswerItemAdapter extends ArrayAdapter<Answer> implements OnKeyList
     	row = inflater.inflate(R.layout.activity_creator_answer, parent, false);
     	holder = getItem(position);
     	answerContent = (EditText) row.findViewById(R.id.et_answer);
+        answerContent.setOnKeyListener(this);
         chk_answer = (CheckBox) row.findViewById(R.id.chk_answer);
         chk_answer.setChecked(holder.getValue());
         chk_answer.setText(holder.getContent());
         chk_answer.setTag(position);
-        answerContent.setOnKeyListener(this);
         chk_answer.setOnClickListener(new CheckBox.OnClickListener() {
 			
 			@Override
