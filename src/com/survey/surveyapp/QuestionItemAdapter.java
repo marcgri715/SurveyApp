@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
+import android.view.inputmethod.EditorInfo;
 import android.view.ViewGroup;
 import android.webkit.WebView.FindListener;
 import android.widget.ArrayAdapter;
@@ -15,7 +18,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class QuestionItemAdapter extends ArrayAdapter<Question> {
+public class QuestionItemAdapter extends ArrayAdapter<Question> implements OnKeyListener {
 
 	private Button btn_add;
 	private Button btn_remove;
@@ -48,6 +51,7 @@ public class QuestionItemAdapter extends ArrayAdapter<Question> {
 		//Result.getInstance().getQuestion(index);
 		setupRemoveButton();	
 		setupAddButton();
+		et_question.setOnKeyListener(this);
 		return row;
 	}
 	
@@ -78,6 +82,21 @@ public class QuestionItemAdapter extends ArrayAdapter<Question> {
 			}
 		});
 	}
+	
+	@Override
+	public boolean onKey(View view, int keyCode, KeyEvent event) {
+		EditText editText = (EditText) view;
+		if (keyCode == EditorInfo.IME_ACTION_DONE ||
+		 keyCode == EditorInfo.IME_ACTION_SEARCH || 
+		 event.getAction() == KeyEvent.ACTION_DOWN &&
+		 event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+			Result.getInstance().setContent(editText.getText().toString());
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	
 	public void getCheckedAnswers() {
 		
