@@ -1,8 +1,5 @@
 package com.survey.surveyapp;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.support.v7.app.ActionBarActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -66,6 +63,17 @@ public class SurveyActivity extends ActionBarActivity {
 				break;
 			}
 		}
+		boolean isFinished = true;
+		for (Question q : Result.getInstance().getQuestions()) {
+			if (!q.isAnswered()) {
+				isFinished = false;
+				break;
+			}
+		}
+		if (!isFinished) {
+			Toast.makeText(this, "Nie odpowiedziano na wszystkie pytania!", Toast.LENGTH_SHORT).show();
+			return;
+		}
 		if (questionIndex < Result.getInstance().getNumberOfQuestions()-1) {
 			questionIndex++;
 			adapter = new SurveyAdapter(context, Result
@@ -81,23 +89,12 @@ public class SurveyActivity extends ActionBarActivity {
 				button.setText("Nastêpne");
 			}
 		} else if (questionIndex == Result.getInstance().getNumberOfQuestions()-1) {
-			boolean isFinished = true;
-			for (Question q : Result.getInstance().getQuestions()) {
-				if (!q.isAnswered()) {
-					isFinished = false;
-					break;
-				}
-			}
-			if (isFinished) {
-				Intent intent = new Intent(this, ResultsActivity.class);
-				this.startActivity(intent);
-				DatabaseManager.getInstance().open(this);
-				DatabaseManager.getInstance().insertKeys();
-				DatabaseManager.getInstance().close();
-				finish();
-			} else {
-				Toast.makeText(this, "Nie odpowiedziano na wszystkie pytania!", Toast.LENGTH_SHORT).show();
-			}
+			Intent intent = new Intent(this, ResultsActivity.class);
+			this.startActivity(intent);
+			DatabaseManager.getInstance().open(this);
+			DatabaseManager.getInstance().insertKeys();
+			DatabaseManager.getInstance().close();
+			finish();
 		}
 	}
 

@@ -27,7 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/et_topic"
         android:layout_below="@+id/et_topic"
-        android:src="@android:drawable/ic_input_add" />
+        android:src="@android:drawable/ic_input_add"
+        android:onClick="addNewQuestionButton" />
 
     <ImageButton
         android:id="@+id/btn_remove_questions"
@@ -36,7 +37,8 @@
         android:layout_alignBaseline="@+id/btn_add_question"
         android:layout_alignBottom="@+id/btn_add_question"
         android:layout_toRightOf="@+id/btn_add_question"
-        android:src="@android:drawable/ic_input_delete"/>
+        android:src="@android:drawable/ic_input_delete"
+        android:onClick="deleteQuestionsButton" />
 
     <Button
         android:id="@+id/btn_save_survey"
@@ -44,6 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/btn_remove_questions"
         android:layout_toRightOf="@+id/btn_remove_questions"
-        android:text="Zapisz ankietę" />
+        android:text="Zapisz ankietę" 
+        android:onClick="finishSurveyButton" />
 
 </RelativeLayout>

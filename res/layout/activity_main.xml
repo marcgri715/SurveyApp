@@ -25,8 +25,17 @@
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
-        android:layout_toRightOf="@+id/textView1"
         android:text="Wypełnij" />
+
+    <Button
+        android:id="@+id/create_srv_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/themeList"
+        android:layout_toRightOf="@+id/button1"
+        android:text="Dodaj ankietę" 
+        android:onClick="createSurvey"/>
 
 </RelativeLayout>
