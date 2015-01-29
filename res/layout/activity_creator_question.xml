@@ -7,22 +7,6 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <ListView
-        android:id="@+id/answersList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/btn_remove_answers" >
-
-    </ListView>
-
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/answersList"
-        android:layout_alignParentTop="true" />
-
     <EditText
         android:id="@+id/et_question"
         android:layout_width="wrap_content"
@@ -30,22 +14,36 @@
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:text="Podaj treść pytania.." />
+    
+    <ListView
+        android:id="@+id/answersList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btn_add_answer" >
+    </ListView>
 
-    <ImageButton
-        android:id="@+id/btn_remove_answers"
+    <CheckBox
+        android:id="@+id/chk_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/answersList"
-        android:layout_below="@+id/checkBox"
-        android:src="@android:drawable/ic_input_delete"/> />
+        android:layout_alignParentTop="true" />
 
     <ImageButton
         android:id="@+id/btn_add_answer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btn_remove_answers"
-        android:layout_alignBottom="@+id/btn_remove_answers"
-        android:layout_toRightOf="@+id/btn_remove_answers"
-        android:src="@android:drawable/ic_input_add"/> />
+        android:layout_alignLeft="@+id/answersList"
+        android:layout_below="@+id/chk_question"
+        android:src="@android:drawable/ic_input_add" />
+
+    <ImageButton
+        android:id="@+id/btn_remove_answers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chk_question"
+        android:layout_toRightOf="@+id/btn_add_answer"
+        android:src="@android:drawable/ic_input_delete" />
 
 </RelativeLayout>
