@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -26,6 +27,7 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		setupStartButton();
 		showList();
+		Result.getInstance().setId(-1);
 		//zaœlepka pod pytania
 		/* SINGLE-TIME USE
 		this.deleteDatabase("Survey.db");
@@ -48,10 +50,14 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// rozpocznij zabawê
-				getQuestions();
-				Intent intent = new Intent(MainActivity.this,
-						SurveyActivity.class);
-				MainActivity.this.startActivity(intent);
+				if (Result.getInstance().getId() != -1) {
+					getQuestions();
+					Intent intent = new Intent(MainActivity.this,
+							SurveyActivity.class);
+					MainActivity.this.startActivity(intent);
+				} else {
+					Toast.makeText(v.getContext(), "Wybierz ankietê!", Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 	}
