@@ -41,6 +41,7 @@ public class AnswerItemAdapter extends ArrayAdapter<Answer> implements OnKeyList
         chk_answer.setChecked(holder.getValue());
         chk_answer.setText(holder.getContent());
         chk_answer.setTag(position);
+        answerContent.setOnKeyListener(this);
         chk_answer.setOnClickListener(new CheckBox.OnClickListener() {
 			
 			@Override
