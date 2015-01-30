@@ -97,7 +97,6 @@ public class QuestionItemAdapter extends ArrayAdapter<Question> implements OnKey
 		}
 	}
 	
-	
 	public void getCheckedAnswers() {
 		
 	}

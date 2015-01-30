@@ -12,13 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Podaj temat ankiety.." />
-
+    
     <ListView
-        android:id="@+id/questionsList"
+        android:id="@+id/answersList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/btn_remove_questions" >
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btn_remove_answers" >
+
     </ListView>
 
     <ImageButton
@@ -44,9 +45,58 @@
         android:id="@+id/btn_save_survey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btn_remove_questions"
         android:layout_alignTop="@+id/btn_remove_questions"
         android:layout_toRightOf="@+id/btn_remove_questions"
-        android:text="Zapisz ankietę" 
-        android:onClick="finishSurveyButton" />
+        android:onClick="finishSurveyButton"
+        android:text="Zapisz ankietę" />
+
+    <EditText
+        android:id="@+id/et_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btn_add_question"
+        android:layout_below="@+id/btn_save_survey"
+        android:ems="10"
+        android:text="Podaj treść pytania.." >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/btn_remove_answers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/btn_remove_questions"
+        android:layout_below="@+id/et_question"
+        android:layout_toRightOf="@+id/btn_add_answer"
+        android:text="-" />
+
+    <Button
+        android:id="@+id/btn_add_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/et_question"
+        android:layout_alignRight="@+id/btn_add_question"
+        android:layout_below="@+id/et_question"
+        android:text="+" />
+
+    <Button
+        android:id="@+id/btn_prev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/answersList"
+        android:layout_alignRight="@+id/et_topic"
+        android:layout_toRightOf="@+id/btn_remove_answers"
+        android:text="&lt;" />
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/answersList"
+        android:layout_alignRight="@+id/btn_save_survey"
+        android:layout_toRightOf="@+id/btn_prev"
+        android:text=">" />
 
 </RelativeLayout>

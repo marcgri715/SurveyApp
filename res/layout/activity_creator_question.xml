@@ -23,12 +23,7 @@
         android:layout_below="@+id/btn_add_answer" >
     </ListView>
 
-    <CheckBox
-        android:id="@+id/chk_question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/answersList"
-        android:layout_alignParentTop="true" />
+
 
     <ImageButton
         android:id="@+id/btn_add_answer"
@@ -45,5 +40,10 @@
         android:layout_below="@+id/chk_question"
         android:layout_toRightOf="@+id/btn_add_answer"
         android:src="@android:drawable/ic_input_delete" />
-
+    <CheckBox
+        android:id="@+id/chk_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/answersList"
+        android:layout_alignParentTop="true" />
 </RelativeLayout>
