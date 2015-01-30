@@ -1,69 +1,28 @@
 package com.survey.surveyapp;
 
-import java.util.ArrayList;
-
 import android.support.v7.app.ActionBarActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnKeyListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.Toast;
 
-public class CreatorActivity extends ActionBarActivity implements OnKeyListener {
+public class CreatorActivity extends ActionBarActivity {
 
-	private ArrayAdapter adapter;
+	private Button addQuestions;
+	private EditText etTopic;
+	private EditText etQuestionsCount;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_creator_main);
-		Result.getInstance().setContent("");
-		Result.getInstance().setQuestions(new ArrayList<Question>(1));
-		Result.getInstance().getQuestion(0).setAnswers(new ArrayList<Answer>(1));
-		EditText editText = (EditText) findViewById(R.id.et_topic);
-		editText.setOnKeyListener(this);
-		ListView listView = (ListView) findViewById(R.id.questionsList);
-		adapter = new QuestionItemAdapter(this, Result.getInstance().getQuestions());
-		listView.setAdapter(adapter);
-	}
-	
-	@Override
-	public boolean onKey(View view, int keyCode, KeyEvent event) {
-		EditText editText = (EditText) view;
-		if (keyCode == EditorInfo.IME_ACTION_DONE ||
-		 keyCode == EditorInfo.IME_ACTION_SEARCH || 
-		 event.getAction() == KeyEvent.ACTION_DOWN &&
-		 event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-			Result.getInstance().setContent(editText.getText().toString());
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public void addNewQuestionButton (View view) {
-		Result.getInstance().getQuestions().add(new Question());
-		int index = Result.getInstance().getNumberOfQuestions();
-		Result.getInstance().getQuestion(index).setAnswers(new ArrayList<Answer>(1));
-		//wystarczy?
-		adapter.notifyDataSetChanged();
-	}
-	
-	public void deleteQuestionsButton (View view) {
-		int deleted = 0;
-		for (Question q : Result.getInstance().getQuestions()) {
-			if (q.isAnswered()) {
-				Result.getInstance().getQuestions().remove(q.getId() - deleted++);
-			}
-		}
-		adapter.notifyDataSetChanged();
+		setContentView(R.layout.activity_creator);
+		etTopic = (EditText)this.findViewById(R.id.et_topic);
+		etQuestionsCount = (EditText)this.findViewById(R.id.et_questions_count);
+		setupAddQuestionsButton();
 	}
 
 	@Override
@@ -83,5 +42,41 @@ public class CreatorActivity extends ActionBarActivity implements OnKeyListener 
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	private void setupAddQuestionsButton() {
+		addQuestions = (Button) findViewById(R.id.btn_add_questions);
+		addQuestions.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (checkInsertedData()) {
+					int questionsCount = Integer.parseInt(etQuestionsCount.getText().toString());				// Odczytuje iloœæ pytañ
+					Result.getInstance().setContent(etTopic.getText().toString());								// Zapisuje temat
+					Intent intent = new Intent(CreatorActivity.this, AddQuestionsActivity.class);				// MarcinoweActivity
+					intent.putExtra("questionsCount", questionsCount);											// Przesy³am iloœæ pytañ
+					CreatorActivity.this.startActivity(intent);
+				}
+			}
+		});
+	}
+	
+	private boolean checkInsertedData() {
+        String topic = etTopic.getText().toString();
+        try {
+        	int count = Integer.parseInt(etQuestionsCount.getText().toString());
+	        if (topic.equals("") || topic.equals("Podaj temat ankiety..")) {
+	        	Toast.makeText(null, "Nie podano tematu ankiety!", Toast.LENGTH_SHORT).show();	// NULL?
+	        	return false;
+	        }
+	        if (count < 1) {
+	        	Toast.makeText(null, "Nieprawid³owa wartoœæ w polu iloœæ pytañ!", Toast.LENGTH_SHORT).show();	// NULL?
+	        	return false;
+	        }
+	        return true;
+        }
+        catch (NumberFormatException ex) {
+        	Toast.makeText(null, "Pole iloœæ pytañ wymaga podania wartoœci numerycznej!", Toast.LENGTH_SHORT).show();	// NULL?
+        	return false;
+        }
 	}
 }
